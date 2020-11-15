@@ -10,4 +10,4 @@ A Flutter 4ch Sample
 
 |      1:3 플레이어     |     2x2 플레이어     |
 | ------------------ | ------------------ |
-| <img src="./screenshots/player_1&3.png" height="400" alt="Screenshot"/>  | <img src="./screenshots/player_2X2.png" height="400" alt="Screenshot"/>  |
+| <img src="./screenshots/player_1&3.jpg" height="400" alt="Screenshot"/>  | <img src="./screenshots/player_2X2.jpg" height="400" alt="Screenshot"/>  |
