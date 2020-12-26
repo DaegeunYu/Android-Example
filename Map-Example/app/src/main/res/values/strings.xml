@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Map Example</string>
+    <string name="package_name">com.map.example</string>
+</resources>
