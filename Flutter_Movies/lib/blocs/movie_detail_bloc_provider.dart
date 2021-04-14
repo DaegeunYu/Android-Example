@@ -9,7 +9,7 @@ class MovieDetailBlocProvider extends InheritedWidget {
   MovieDetailBlocProvider({Key key, Widget child}) :bloc = MovieDetailBloc(), super(key:key, child:child);
 
   static MovieDetailBlocProvider of(BuildContext context) => 
-    context.inheritFromWidgetOfExactType(MovieDetailBlocProvider);
+    context.dependOnInheritedWidgetOfExactType<MovieDetailBlocProvider>();
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
