@@ -7,4 +7,4 @@ LiveData, Room, Retrofit2 등을 활용함
 즐겨찾기 기능을 넣어 우측 상단 하트를 누르면 즐겨찾기한 메모만 확인 가능
 
 # Screenshot
-<img src="./screenshots/01.jpg" height="400" alt="Screenshot"/>  | <img src="./screenshots/02.jpg" height="400" alt="Screenshot"/>
+<img src="./screenshot/01.jpg" height="400" alt="Screenshot"/>  | <img src="./screenshot/02.jpg" height="400" alt="Screenshot"/>
