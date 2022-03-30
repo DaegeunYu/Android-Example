@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MemoChat</string>
+
+    <string name="title">메모</string>
+    <string name="send_message_hint">대화 내용을 입력하세요</string>
+    <string name="send_button">전 송</string>
+
+</resources>
