@@ -5,3 +5,4 @@
  - Map Example
  - Flutter Bloc Pattern Example
  - Memo Chat
+ - OCR Sample
