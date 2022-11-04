@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
-import android.graphics.drawable.Drawable;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
@@ -32,6 +31,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextureView textureView;
     private ImageView button;
-    private ImageView preview;
     private TextView result;
 
     private String cameraId;
@@ -72,6 +71,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected CaptureRequest.Builder captureRequestBuilder;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
+    static {
+        ORIENTATIONS.append(Surface.ROTATION_0, 90);
+        ORIENTATIONS.append(Surface.ROTATION_90, 0);
+        ORIENTATIONS.append(Surface.ROTATION_180, 270);
+        ORIENTATIONS.append(Surface.ROTATION_270, 180);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,15 +85,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         textureView = findViewById(R.id.texture_view);
         button = findViewById(R.id.button_capture);
-        preview = findViewById(R.id.captured);
         result = findViewById(R.id.result);
 
         textureView.setSurfaceTextureListener(textureViewListener);
 
         button.setOnClickListener(this);
-
     }
-
 
     private TextureView.SurfaceTextureListener textureViewListener = new TextureView.SurfaceTextureListener() {
         @Override
@@ -117,16 +120,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //This is called when the camera is open
             cameraDevice = camera;
             createCameraPreview(textureView);
+            Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onDisconnected(CameraDevice camera) {
+            Toast.makeText(MainActivity.this, "Disconnected Camera Device", Toast.LENGTH_SHORT).show();
             cameraDevice.close();
-//            view.setCameraCapturing(false);
         }
 
         @Override
         public void onError(CameraDevice camera, int error) {
+            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
             cameraDevice.close();
             cameraDevice = null;
         }
@@ -163,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
                     //The camera is already closed
-                    if (null == cameraDevice) {
+                    if (cameraDevice == null) {
                         return;
                     }
                     // When the session is ready, we start displaying the preview.
@@ -182,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     protected void updatePreview() {
-        if (null == cameraDevice) {
+        if (cameraDevice == null) {
             Log.e("DGYU", "updatePreview error, return");
         }
         captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
@@ -197,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (null == cameraDevice) {
+        if (cameraDevice == null) {
             Log.e("DGYU", "cameraDevice is null");
             return;
         }
