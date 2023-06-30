@@ -32,6 +32,22 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(applicationContext)
         }
 
+        /**
+         * com.android.vending    // 구글 플레이스토어
+         * com.skt.skaf.A000Z00040    // SKT원스토어
+         * com.kt.olleh.storefront    // KT원스토어
+         * android.lgt.appstore  // LG U+원스토어
+         * com.lguplus.appstore  // 원스토어
+         * com.sec.android.app.samsungapps    // 갤럭시 앱스
+         * com.sec.android.easyMover.Agent  // 삼성 스마트 스위치
+         */
+        // 앱이 어디서 설치된건지 확인할 때 사용
+        val checkDownloadStore = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            packageManager.getInstallSourceInfo(packageName).installingPackageName.toString()
+        } else {
+            packageManager.getInstallerPackageName(packageName).toString()
+        }
+
         favoriteChecked(binding.favorite, mAdapter)
         binding.favorite.setOnClickListener(View.OnClickListener {
             checked = !checked!!
